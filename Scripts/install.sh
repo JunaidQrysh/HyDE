@@ -137,9 +137,6 @@ EOF
     #--------------------------------#
     if nvidia_detect; then
         if [ ${flg_Nvidia} -eq 1 ]; then
-            cat /usr/lib/modules/*/pkgbase | while read -r kernel; do
-                echo "${kernel}-headers" >>"${scrDir}/install_pkg.lst"
-            done
             nvidia_detect --drivers >>"${scrDir}/install_pkg.lst"
         else
             print_log -warn "Nvidia" " :: " "Nvidia GPU detected but ignored..."
