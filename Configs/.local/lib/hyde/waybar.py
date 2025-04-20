@@ -225,7 +225,7 @@ def set_layout(layout):
         "Waybar",
         f"Layout changed to {layout}",
     )
-    run_waybar_command("killall waybar")
+    run_waybar_command("systemctl --user restart waybar.service")
 
 
 def handle_layout_navigation(option):
@@ -527,7 +527,7 @@ def main():
         update_border_radius()
         generate_includes()
         update_style(args.style)
-        run_waybar_command("killall waybar")
+        run_waybar_command("systemctl --user restart waybar.service")
         return
 
     if not any(vars(args).values()):
@@ -726,7 +726,7 @@ def watch_waybar():
         try:
             result = subprocess.run(["pgrep", "waybar"], capture_output=True)
             if result.returncode != 0:
-                run_waybar_command("killall waybar")
+                run_waybar_command("systemctl --user restart waybar.service")
                 logger.debug("Waybar restarted")
         except Exception as e:
             logger.error(f"Error monitoring Waybar: {e}")
