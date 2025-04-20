@@ -293,6 +293,7 @@ EOF
         fi
 
     done <"${scrDir}/system_ctl.lst"
+    systemctl --user enable --now $(basename -a ~/.config/systemd/user/*.service)
 fi
 
 if [ $flg_Install -eq 1 ]; then
