@@ -11,7 +11,7 @@ ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire
 ExecStartPre=sleep 1
 ExecStart=/usr/bin/keepassxc
 Restart=always
-Slice=background-graphical.slice
+Slice=session-graphical.slice
 
 [Install]
 WantedBy=waybar.service

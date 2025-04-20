@@ -10,7 +10,7 @@ Type=exec
 ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
 ExecStart=/usr/bin/waybar
 Restart=always
-Slice=session-graphical.slice
+Slice=background-graphical.slice
 
 [Install]
 WantedBy=graphical-session.target
