@@ -24,7 +24,7 @@ aquamarine-git
 hyprland-qtutils-git
 hyprcursor-git
 uwsm                                                   # universal wayland session manager
-app2unit                                               # launch applications as systemd units
+app2unit-git                                           # launch applications as systemd units
 dunst                                                  # notification daemon
 rofi-wayland                                           # application launcher
 waybar                                                 # system bar

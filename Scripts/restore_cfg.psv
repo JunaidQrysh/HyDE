@@ -29,15 +29,15 @@ B = Backup - Backup the target
 
 
  Hyde core files 
-P|${HOME}/.config/hyde|config.toml|aquamarine
-P|${HOME}/.config/hypr|hyde.conf workflows.conf animations.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|aquamarine
-P|${HOME}/.config/hypr|nvidia.conf|aquamarine nvidia-utils
-P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|aquamarine
-P|${HOME}/.local/state/hyde|hyprland.conf|aquamarine
+P|${HOME}/.config/hyde|config.toml|hyprland
+P|${HOME}/.config/hypr|hyde.conf workflows.conf animations.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|hyprland
+P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
+P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|hyprland
+P|${HOME}/.local/state/hyde|hyprland.conf|hyprland
 
 S|${HOME}/.config/uwsm|env|uwsm
-S|${HOME}/.config/hypr|hyprland.conf|aquamarine
-O|${HOME}/.local/bin|hyde-shell hydectl|aquamarine
+S|${HOME}/.config/hypr|hyprland.conf|hyprland
+O|${HOME}/.local/bin|hyde-shell hydectl|hyprland
 S|${HOME}/.config|gtk-3.0|nwg-look
 S|${HOME}/.config|nwg-look|nwg-look
 S|${HOME}/.config|xsettingsd|nwg-look
@@ -45,17 +45,17 @@ S|${HOME}|.gtkrc-2.0|nwg-look
 S|${HOME}/.config|Kvantum|kvantum
 S|${HOME}/.config|qt5ct|qt5ct
 S|${HOME}/.config|qt6ct|qt6ct
-S|${HOME}/.config/hyde|wallbash|aquamarine
-S|${HOME}/.config/hypr|animations|aquamarine
-S|${HOME}/.config/hypr|workflows|aquamarine
-P|${HOME}/.config/hypr|pyprland.toml|aquamarine
+S|${HOME}/.config/hyde|wallbash|hyprland
+S|${HOME}/.config/hypr|animations|hyprland
+S|${HOME}/.config/hypr|workflows|hyprland
+P|${HOME}/.config/hypr|pyprland.toml|hyprland
 P|${HOME}/.config/keepassxc|keepassxc.ini|keepassxc
 P|${HOME}/.config/swayimg|config|swayimg
-P|${HOME}/.local/share|applications|aquamarine
-P|${HOME}/.local/share|dbus-1|aquamarine
+P|${HOME}/.local/share|applications|hyprland
+P|${HOME}/.local/share|dbus-1|hyprland
 
-O|${HOME}/.local/share|hyde|aquamarine
-O|${HOME}/.local/lib|hyde|aquamarine
+O|${HOME}/.local/share|hyde|hyprland
+O|${HOME}/.local/lib|hyde|hyprland
 
  Editor 
 P|${HOME}/.config/Code - OSS/User|settings.json|code
