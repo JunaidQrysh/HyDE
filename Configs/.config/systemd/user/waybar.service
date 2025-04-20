@@ -3,6 +3,7 @@ Description=Highly customizable Wayland bar for Sway and Wlroots based composito
 Documentation=man:waybar(5)
 # order startup after WM
 After=graphical-session.target
+StartLimitBurst=100
 
 [Service]
 Type=exec

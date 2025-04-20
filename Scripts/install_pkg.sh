@@ -89,7 +89,7 @@ fi
 #-----------------------------#
 hyprland_root="${HOME}/Clone/Hyprland"
 
-(cd "${hyprland_root}" 2>/dev/null && sudo make install >/dev/null 2>&1)
+(cd "${hyprland_root}" 2>/dev/null && sudo make install >/dev/null 2>&1 || true)
 if ! command -v Hyprland >/dev/null 2>&1; then
     echo "Building Hyprland..."
     if [[ ! -d "${hyprland_root}" ]]; then
