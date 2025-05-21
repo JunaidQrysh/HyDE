@@ -23,7 +23,7 @@ export shlList
 pkg_installed() {
     local PkgIn=$1
 
-    if pacman -Q "${PkgIn}" &>/dev/null; then
+    if pacman -Q "${PkgIn}" &>/dev/null || command -v "${PkgIn}" &>/dev/null; then
         return 0
     else
         return 1
@@ -76,7 +76,7 @@ nvidia_detect() {
     fi
     if [ "${1}" == "--drivers" ]; then
         while read -r -d ' ' nvcode; do
-            awk -F '|' -v nvc="${nvcode}" 'substr(nvc,1,length($3)) == $3 {split(FILENAME,driver,"/"); print driver[length(driver)],"\nnvidia-utils"}' "${scrDir}"/nvidia-db/nvidia*dkms
+            awk -F '|' -v nvc="${nvcode}" 'substr(nvc,1,length($3)) == $3 {split(FILENAME,driver,"/"); print driver[length(driver)],"\nnvidia-utils"}' "${scrDir}"/nvidia-db/nvidia*open
         done <<<"${dGPU[@]}"
         return 0
     fi

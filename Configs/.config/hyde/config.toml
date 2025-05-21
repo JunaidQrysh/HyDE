@@ -1,3 +1,8 @@
 # Configuration file for HyDE
 # Environment variables should be on top
 # Updated config.toml file can be found at $HOME/.local/share/hyde/config.toml
+
+OBSIDIAN_VAULT="$HOME/Documents/Obsidian"
+
+[wlogout]
+style = 2

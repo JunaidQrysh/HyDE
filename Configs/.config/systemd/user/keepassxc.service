@@ -1,0 +1,23 @@
+[Unit]
+Description=Password Manager
+Documentation=man:keepassxc(5)
+# order startup after WM
+After=waybar.service
+
+[Service]
+Type=exec
+# Repurpose XDG Autostart filtering
+ExecCondition=/lib/systemd/systemd-xdg-autostart-condition "wlroots:sway:Wayfire:labwc:Hyprland" ""
+ExecStartPre=sleep 1
+ExecStart=/usr/bin/keepassxc
+Restart=always
+Slice=session-graphical.slice
+
+[Install]
+WantedBy=waybar.service
+# Alternatively can be wanted by specific WMs' targets
+# Should also be duplicated in 'After=' to avoid ordering loop
+#WantedBy=wayland-session@sway.desktop.target
+#WantedBy=wayland-session@wayfire.desktop.target
+#WantedBy=wayland-session@labwc.desktop.target
+#WantedBy=wayland-session@hyprland.desktop.target

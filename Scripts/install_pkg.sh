@@ -83,3 +83,24 @@ if [ "${flg_DryRun}" -ne 1 ]; then
         "${aurhlpr}" ${use_default:+"$use_default"} -S "${aurhPkg[@]}"
     fi
 fi
+
+#-----------------------------#
+#    Hyprland Installation    #
+#-----------------------------#
+hyprland_root="${HOME}/Clone/Hyprland"
+
+(cd "${hyprland_root}" 2>/dev/null && sudo make install >/dev/null 2>&1 || true)
+if ! command -v Hyprland >/dev/null 2>&1; then
+    echo "Building Hyprland..."
+    if [[ ! -d "${hyprland_root}" ]]; then
+        mkdir -p "${hyprland_root}"
+        git clone --recursive https://github.com/hyprwm/Hyprland.git "${hyprland_root}" || {
+            echo "Hyprland installation failed"
+            exit 1
+        }
+        (cd "${hyprland_root}" &&
+            git pull &&
+            make all &&
+            sudo make install)
+    fi
+fi

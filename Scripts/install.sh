@@ -137,9 +137,6 @@ EOF
     #--------------------------------#
     if nvidia_detect; then
         if [ ${flg_Nvidia} -eq 1 ]; then
-            cat /usr/lib/modules/*/pkgbase | while read -r kernel; do
-                echo "${kernel}-headers" >>"${scrDir}/install_pkg.lst"
-            done
             nvidia_detect --drivers >>"${scrDir}/install_pkg.lst"
         else
             print_log -warn "Nvidia" " :: " "Nvidia GPU detected but ignored..."
@@ -245,6 +242,7 @@ EOF
     "${scrDir}/restore_thm.sh"
     print_log -g "[generate] " "cache ::" "Wallpapers..."
     if [ "${flg_DryRun}" -ne 1 ]; then
+        export PATH=""$HOME/.local/lib/hyde":${PATH}"
         "$HOME/.local/lib/hyde/swwwallcache.sh" -t ""
         "$HOME/.local/lib/hyde/theme.switch.sh" -q || true
         echo "[install] reload :: Hyprland"
@@ -295,6 +293,7 @@ EOF
         fi
 
     done <"${scrDir}/system_ctl.lst"
+    systemctl --user enable --now $(basename -a ~/.config/systemd/user/*.service)
 fi
 
 if [ $flg_Install -eq 1 ]; then

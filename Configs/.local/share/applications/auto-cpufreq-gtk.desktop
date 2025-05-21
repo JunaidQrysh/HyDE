@@ -1,0 +1,10 @@
+[Desktop Entry]
+NoDisplay=true
+Name=auto-cpufreq
+Exec=auto-cpufreq-gtk
+Type=Application
+Terminal=false
+Icon=auto-cpufreq
+StartupWMClass=app.py
+Categories=System;
+X-Desktop-File-Install-Version=0.28

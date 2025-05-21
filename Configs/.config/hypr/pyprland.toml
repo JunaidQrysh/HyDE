@@ -1,0 +1,17 @@
+[pyprland]
+plugins = ["scratchpads"]
+
+[scratchpads.obsidian]
+animation = "fromTop"
+command = "obsidian"
+class = "obsidian"
+size = "50% 52%"
+preserve_aspect = true
+lazy = true
+
+[scratchpads.volume]
+animation = "fromRight"
+command = "kitty --class mixer pulsemixer"
+class = "mixer"
+size = "34% 43%"
+lazy = true
