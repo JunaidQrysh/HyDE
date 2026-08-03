@@ -22,7 +22,7 @@ deez_log="$work_dir/deez.log"
 # Everything the restore hands off to is a stub that records the fact, so a
 # case can only fail on the flow under test and nothing reaches the machine
 # running the suite.
-for stub in install_env install_pre install_aur install_pst restore_thm restore_svc; do
+for stub in install_pre install_aur install_pst restore_thm restore_svc; do
     printf '#!/usr/bin/env sh\nprintf "%%s\\n" "%s" >>"%s"\n' "$stub" "$ran_log" \
         >"$clone_dir/Scripts/$stub.sh"
     chmod +x "$clone_dir/Scripts/$stub.sh"
@@ -34,14 +34,21 @@ chmod +x "$clone_dir/Scripts/migrations/v99.9.9.sh"
 
 mkdir -p "$clone_dir/Configs/.local/lib/hyde/pyutils"
 printf 'import sys\nsys.exit(0)\n' >"$clone_dir/Configs/.local/lib/hyde/pyutils/lua_env.py"
+# The restore refreshes the Python environment before it reaches deez, so the
+# script it calls has to answer here too. Whether it does is checked by
+# test_install_env; this case only needs it out of the way.
+printf 'import sys\nsys.exit(0)\n' >"$clone_dir/Configs/.local/lib/hyde/pyutils/python_env.py"
 
 mkdir -p "$home_dir/.local/state/hyde/python_env/bin" "$home_dir/.local/lib/hyde/wallpaper"
 for helper in "wallpaper/cache.sh" "theme.switch.sh" "waybar.py"; do
-    printf '#!/usr/bin/env sh\nexit 0\n' >"$home_dir/.local/lib/hyde/$helper"
+    printf '#!/usr/bin/env sh\nprintf "%%s\\n" "%s" >>"%s"\n' "$(basename "$helper")" "$ran_log" \
+        >"$home_dir/.local/lib/hyde/$helper"
     chmod +x "$home_dir/.local/lib/hyde/$helper"
 done
 
 deez_exe="$home_dir/.local/state/hyde/python_env/bin/deez"
+# The environment step syncs through the interpreter in that environment.
+ln -sf "$(command -v python3)" "$home_dir/.local/state/hyde/python_env/bin/python"
 
 # The stub records every invocation and can be told to fail the core deploy,
 # which is the call that used to end the run.
@@ -90,6 +97,7 @@ grep -q 'dots-groups/core.toml' "$deez_log" || fail "a clean restore never deplo
 ran restore_thm || fail "a clean restore did not apply the theme"
 ran migration || fail "a clean restore did not run the migrations"
 ran restore_svc || fail "a clean restore did not enable the services"
+ran cache.sh || fail "a clean restore did not rebuild the wallpaper cache"
 
 # The core deployment fails: the remaining steps still run, and the run ends
 # non-zero saying what happened.
@@ -103,6 +111,7 @@ grep -q 'dots-groups/extra.toml' "$deez_log" ||
 ran restore_thm || fail "a failed deployment stopped the theme from being applied"
 ran migration || fail "a failed deployment stopped the migrations from running"
 ran restore_svc || fail "a failed deployment stopped the services from being enabled"
+ran cache.sh || fail "a failed deployment stopped the wallpaper cache from being rebuilt"
 grep -q 'Some dots were not deployed' "$work_dir/out.log" ||
     fail "a failed deployment did not say so at the end of the run"
 grep -q 'COMPLETED' "$work_dir/out.log" &&
