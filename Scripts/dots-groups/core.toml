@@ -2,7 +2,6 @@
 [global]
     action      = "preserve"                                 #
     git         = "https://github.com/HyDE-Project/HyDE.git"
-    git_branch  = "lua"
     owner       = "The HyDE Project"                         #
     pre_command = "echo 'starting deployment'"
     version     = "0.1.0"
